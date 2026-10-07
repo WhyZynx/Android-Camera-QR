@@ -28,6 +28,10 @@
         <activity
             android:name=".ScanQrActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".ScanResultActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
