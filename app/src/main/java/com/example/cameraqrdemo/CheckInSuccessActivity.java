@@ -29,12 +29,10 @@ public class CheckInSuccessActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Ánh xạ View
         tvBookingId = findViewById(R.id.tvBookingId);
         tvCourt = findViewById(R.id.tvCourt);
         btnBackHome = findViewById(R.id.btnBackHome);
 
-        // Nhận BOOKING_ID và COURT từ Intent
         Intent intent = getIntent();
         String bookingId = "N/A";
         String court = "N/A";
@@ -48,11 +46,9 @@ public class CheckInSuccessActivity extends AppCompatActivity {
             }
         }
 
-        // Hiển thị dữ liệu
         tvBookingId.setText(bookingId);
         tvCourt.setText(court);
 
-        // Xử lý nút Back Home: Quay về MainActivity và dọn dẹp backstack
         btnBackHome.setOnClickListener(v -> {
             Intent intentHome = new Intent(CheckInSuccessActivity.this, MainActivity.class);
             intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);

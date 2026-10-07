@@ -41,13 +41,10 @@ public class ScanQrActivity extends AppCompatActivity {
     private PreviewView previewView;
     private Button btnCancel;
 
-    // Biến cờ tránh mở ScanResultActivity nhiều lần liên tục khi đã quét được QR
     private boolean isQrDetected = false;
 
-    // ML Kit Barcode Scanner
     private BarcodeScanner barcodeScanner;
 
-    // Launcher yêu cầu quyền Camera
     private final ActivityResultLauncher<String> cameraPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
@@ -69,27 +66,22 @@ public class ScanQrActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Ánh xạ View
         previewView = findViewById(R.id.previewView);
         btnCancel = findViewById(R.id.btnCancel);
 
-        // Khởi tạo ML Kit Barcode Scanner chỉ nhận dạng định dạng QR Code
         BarcodeScannerOptions options = new BarcodeScannerOptions.Builder()
                 .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
                 .build();
         barcodeScanner = BarcodeScanning.getClient(options);
 
-        // Xử lý nút Cancel
         btnCancel.setOnClickListener(v -> finish());
 
-        // Kiểm tra quyền và mở Camera
         checkCameraPermission();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Reset cờ nhận diện khi quay lại màn hình này từ ScanResultActivity
         isQrDetected = false;
     }
 
@@ -111,17 +103,14 @@ public class ScanQrActivity extends AppCompatActivity {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
 
-                // 1. Cấu hình Camera Preview
                 Preview preview = new Preview.Builder().build();
                 preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
-                // 2. Cấu hình ImageAnalysis để xử lý từng frame ảnh từ Camera
                 ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
                         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                         .build();
 
                 imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), imageProxy -> {
-                    // Nếu đã phát hiện QR trước đó, bỏ qua frame hiện tại
                     if (isQrDetected) {
                         imageProxy.close();
                         return;
@@ -134,7 +123,6 @@ public class ScanQrActivity extends AppCompatActivity {
                                 imageProxy.getImageInfo().getRotationDegrees()
                         );
 
-                        // Dùng ML Kit phân tích hình ảnh
                         barcodeScanner.process(image)
                                 .addOnSuccessListener(barcodes -> {
                                     if (isQrDetected) {
@@ -145,7 +133,6 @@ public class ScanQrActivity extends AppCompatActivity {
                                         if (rawValue != null && !rawValue.isEmpty()) {
                                             isQrDetected = true;
 
-                                            // Mở ScanResultActivity và truyền rawValue qua Intent
                                             Intent intent = new Intent(ScanQrActivity.this, ScanResultActivity.class);
                                             intent.putExtra("QR_DATA", rawValue);
                                             startActivity(intent);
@@ -160,13 +147,10 @@ public class ScanQrActivity extends AppCompatActivity {
                     }
                 });
 
-                // Chọn camera sau
                 CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
 
-                // Unbind tất cả use case cũ trước khi bind
                 cameraProvider.unbindAll();
 
-                // Bind Preview và ImageAnalysis vào lifecycle của Activity
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
 
             } catch (ExecutionException | InterruptedException e) {
