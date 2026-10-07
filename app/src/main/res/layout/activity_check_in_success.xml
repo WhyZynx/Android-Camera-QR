@@ -5,6 +5,7 @@
     android:id="@+id/mainCheckInSuccess"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_light"
     android:padding="24dp"
     tools:context=".CheckInSuccessActivity">
 
@@ -19,17 +20,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Symbol Checkmark -->
+        <!-- Symbol Checkmark Circle -->
         <TextView
             android:id="@+id/tvCheckMark"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:background="#E8F5E9"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/bg_checkmark_circle"
             android:gravity="center"
             android:text="✓"
-            android:textColor="#2E7D32"
-            android:textSize="36sp"
+            android:textColor="@color/valid_green"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <!-- Tiêu đề -->
@@ -38,46 +39,63 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="CHECK-IN SUCCESSFUL"
-            android:textColor="#2E7D32"
+            android:text="@string/checkin_success_title"
+            android:textColor="@color/valid_green"
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <!-- Booking ID -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Booking ID"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvBookingId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="BK001"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <!-- Court -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Court"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tvCourt"
-            android:layout_width="wrap_content"
+        <!-- Card chứa Booking ID và Court -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="Badminton Court 01"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Booking ID -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_booking_id"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvBookingId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="BK001"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/border_color" />
+
+            <!-- Court -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_court"
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tvCourt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Badminton Court 01"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <!-- Thông báo -->
         <TextView
@@ -85,9 +103,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Your booking has been checked in successfully."
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp" />
+            android:text="@string/checkin_success_msg"
+            android:textColor="@color/text_secondary"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -97,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="Back Home"
+        android:text="@string/btn_back_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
