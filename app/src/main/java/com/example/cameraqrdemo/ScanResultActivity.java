@@ -2,8 +2,11 @@ package com.example.cameraqrdemo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +16,17 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ScanResultActivity extends AppCompatActivity {
 
-    private TextView tvRawContent;
-    private Button btnBack;
+    private LinearLayout layoutValid;
+    private LinearLayout layoutInvalid;
+
+    private TextView tvBookingId;
+    private TextView tvCourt;
+    private TextView tvDate;
+    private TextView tvTime;
+
+    private Button btnConfirmCheckIn;
+    private Button btnCancel;
+    private Button btnScanAgain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,17 +41,80 @@ public class ScanResultActivity extends AppCompatActivity {
         });
 
         // Ánh xạ View
-        tvRawContent = findViewById(R.id.tvRawContent);
-        btnBack = findViewById(R.id.btnBack);
+        layoutValid = findViewById(R.id.layoutValid);
+        layoutInvalid = findViewById(R.id.layoutInvalid);
 
-        // Lấy dữ liệu QR từ Intent
+        tvBookingId = findViewById(R.id.tvBookingId);
+        tvCourt = findViewById(R.id.tvCourt);
+        tvDate = findViewById(R.id.tvDate);
+        tvTime = findViewById(R.id.tvTime);
+
+        btnConfirmCheckIn = findViewById(R.id.btnConfirmCheckIn);
+        btnCancel = findViewById(R.id.btnCancel);
+        btnScanAgain = findViewById(R.id.btnScanAgain);
+
+        // Lấy dữ liệu QR từ Intent truyền từ ScanQrActivity
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("QR_DATA")) {
-            String qrData = intent.getStringExtra("QR_DATA");
-            tvRawContent.setText(qrData);
+        String qrData = (intent != null) ? intent.getStringExtra("QR_DATA") : null;
+
+        // Parse và Validate dữ liệu QR
+        parseAndValidateQrData(qrData);
+
+        // Sự kiện bấm nút Confirm Check-in
+        btnConfirmCheckIn.setOnClickListener(v -> {
+            Toast.makeText(this, "Booking confirmed for check-in", Toast.LENGTH_SHORT).show();
+        });
+
+        // Sự kiện bấm nút Cancel
+        btnCancel.setOnClickListener(v -> finish());
+
+        // Sự kiện bấm nút Scan Again
+        btnScanAgain.setOnClickListener(v -> finish());
+    }
+
+    private void parseAndValidateQrData(String qrData) {
+        String bookingId = null;
+        String court = null;
+        String date = null;
+        String time = null;
+
+        if (qrData != null && !qrData.trim().isEmpty()) {
+            // Tách từng dòng theo ký tự xuống dòng (\n hoặc \r\n)
+            String[] lines = qrData.split("\\r?\\n");
+            for (String line : lines) {
+                line = line.trim();
+                if (line.startsWith("BOOKING_ID=")) {
+                    bookingId = line.substring("BOOKING_ID=".length()).trim();
+                } else if (line.startsWith("COURT=")) {
+                    court = line.substring("COURT=".length()).trim();
+                } else if (line.startsWith("DATE=")) {
+                    date = line.substring("DATE=".length()).trim();
+                } else if (line.startsWith("TIME=")) {
+                    time = line.substring("TIME=".length()).trim();
+                }
+            }
         }
 
-        // Nút Back
-        btnBack.setOnClickListener(v -> finish());
+        // Kiểm tra tính hợp lệ: cả 4 trường đều không null và không rỗng
+        boolean isValid = bookingId != null && !bookingId.isEmpty()
+                && court != null && !court.isEmpty()
+                && date != null && !date.isEmpty()
+                && time != null && !time.isEmpty();
+
+        if (isValid) {
+            // Hiển thị layout hợp lệ
+            layoutValid.setVisibility(View.VISIBLE);
+            layoutInvalid.setVisibility(View.GONE);
+
+            // Gán giá trị các trường
+            tvBookingId.setText(bookingId);
+            tvCourt.setText(court);
+            tvDate.setText(date);
+            tvTime.setText(time);
+        } else {
+            // Hiển thị layout không hợp lệ
+            layoutValid.setVisibility(View.GONE);
+            layoutInvalid.setVisibility(View.VISIBLE);
+        }
     }
 }
