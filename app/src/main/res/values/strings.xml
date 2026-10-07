@@ -22,4 +22,24 @@
 
     <string name="qr_generation_error">Unable to generate QR code.</string>
 
+    <string name="main_title">Camera &amp; QR Demo</string>
+    <string name="main_subtitle">Sports Court Booking</string>
+    <string name="btn_scan_qr">Scan QR Code</string>
+    <string name="btn_generate_qr">Generate Booking QR</string>
+    <string name="scan_title">Scan Booking QR</string>
+    <string name="scan_instruction">Place the booking QR code inside the frame.</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="booking_info_title">Booking Information</string>
+    <string name="label_booking_id">Booking ID</string>
+    <string name="label_court">Court</string>
+    <string name="label_date">Date</string>
+    <string name="label_time">Time</string>
+    <string name="status_qr_valid">QR Code Valid</string>
+    <string name="btn_confirm_checkin">Confirm Check-in</string>
+    <string name="invalid_qr_title">Invalid QR Code</string>
+    <string name="invalid_qr_msg">The QR code does not contain valid booking information.</string>
+    <string name="btn_scan_again">Scan Again</string>
+    <string name="checkin_success_title">Check-in Successful</string>
+    <string name="checkin_success_msg">Your booking has been checked in successfully.</string>
+    <string name="btn_back_home">Back Home</string>
 </resources>

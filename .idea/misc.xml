@@ -7,4 +7,5 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_25" default="true" project-jdk-name="jbr-25" project-jdk-type="JavaSDK" />
 </project>
