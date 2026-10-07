@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +26,9 @@ public class ScanResultActivity extends AppCompatActivity {
     private Button btnConfirmCheckIn;
     private Button btnCancel;
     private Button btnScanAgain;
+
+    private String bookingId;
+    private String court;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,12 @@ public class ScanResultActivity extends AppCompatActivity {
         // Parse và Validate dữ liệu QR
         parseAndValidateQrData(qrData);
 
-        // Sự kiện bấm nút Confirm Check-in
+        // Sự kiện bấm nút Confirm Check-in -> Chuyển sang CheckInSuccessActivity
         btnConfirmCheckIn.setOnClickListener(v -> {
-            Toast.makeText(this, "Booking confirmed for check-in", Toast.LENGTH_SHORT).show();
+            Intent intentSuccess = new Intent(ScanResultActivity.this, CheckInSuccessActivity.class);
+            intentSuccess.putExtra("BOOKING_ID", bookingId);
+            intentSuccess.putExtra("COURT", court);
+            startActivity(intentSuccess);
         });
 
         // Sự kiện bấm nút Cancel
@@ -73,8 +78,8 @@ public class ScanResultActivity extends AppCompatActivity {
     }
 
     private void parseAndValidateQrData(String qrData) {
-        String bookingId = null;
-        String court = null;
+        bookingId = null;
+        court = null;
         String date = null;
         String time = null;
 
