@@ -1,3 +1,25 @@
 <resources>
+
     <string name="app_name">CameraQRDemo</string>
+
+    <string name="home_label">SPORTS COURT BOOKING</string>
+    <string name="home_title">QR Check-in</string>
+    <string name="home_description">Generate or scan a booking QR code for court check-in.</string>
+
+    <string name="generate_qr">Generate Booking QR</string>
+    <string name="scan_qr">Scan QR Code</string>
+
+    <string name="booking_qr_title">Booking QR</string>
+    <string name="booking_qr_description">Booking information for your court reservation.</string>
+
+    <string name="booking_id_label">Booking ID</string>
+    <string name="court_label">Court</string>
+    <string name="date_label">Date</string>
+    <string name="time_label">Time</string>
+
+    <string name="scan_for_checkin">Scan this QR code to check in</string>
+    <string name="back">Back</string>
+
+    <string name="qr_generation_error">Unable to generate QR code.</string>
+
 </resources>
