@@ -50,7 +50,7 @@ public class ScanQrActivity extends AppCompatActivity {
                 if (isGranted) {
                     startCamera();
                 } else {
-                    Toast.makeText(this, "Cần cấp quyền Camera để quét mã QR", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Camera permission is required to scan QR codes.", Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -140,7 +140,7 @@ public class ScanQrActivity extends AppCompatActivity {
                                         }
                                     }
                                 })
-                                .addOnFailureListener(e -> Log.e(TAG, "Phân tích QR thất bại", e))
+                                .addOnFailureListener(e -> Log.e(TAG, "QR analysis failed", e))
                                 .addOnCompleteListener(task -> imageProxy.close());
                     } else {
                         imageProxy.close();
@@ -154,8 +154,8 @@ public class ScanQrActivity extends AppCompatActivity {
                 cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageAnalysis);
 
             } catch (ExecutionException | InterruptedException e) {
-                Log.e(TAG, "Lỗi khi khởi chạy Camera", e);
-                Toast.makeText(this, "Không thể mở Camera: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Error starting camera", e);
+                Toast.makeText(this, "Cannot open camera: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }, ContextCompat.getMainExecutor(this));
     }

@@ -9,7 +9,6 @@
     android:padding="24dp"
     tools:context=".MainActivity">
 
-    <!-- Header Container -->
     <LinearLayout
         android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
@@ -41,7 +40,6 @@
 
     </LinearLayout>
 
-    <!-- Actions Container -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +49,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutHeader">
 
-        <!-- Action 1: Scan QR Code (Student 2) -->
         <LinearLayout
             android:id="@+id/cardScanQr"
             android:layout_width="match_parent"
@@ -88,7 +85,6 @@
 
         </LinearLayout>
 
-        <!-- Action 2: Generate Booking QR (Student 1) -->
         <LinearLayout
             android:id="@+id/cardGenerateQr"
             android:layout_width="match_parent"

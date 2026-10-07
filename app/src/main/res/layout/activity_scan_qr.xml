@@ -8,7 +8,6 @@
     android:background="@android:color/black"
     tools:context=".ScanQrActivity">
 
-    <!-- Camera PreviewView -->
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="0dp"
@@ -18,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Top Title Overlay Bar -->
     <LinearLayout
         android:id="@+id/layoutTopBar"
         android:layout_width="match_parent"
@@ -41,7 +39,6 @@
 
     </LinearLayout>
 
-    <!-- Scanner Frame Overlay Box -->
     <View
         android:id="@+id/viewScanFrame"
         android:layout_width="260dp"
@@ -53,7 +50,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.45" />
 
-    <!-- Bottom Instruction Bar -->
     <LinearLayout
         android:id="@+id/layoutBottomBar"
         android:layout_width="match_parent"

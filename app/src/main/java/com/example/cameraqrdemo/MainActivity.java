@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnGenerateQr = findViewById(R.id.btnGenerateQr);
         View cardGenerateQr = findViewById(R.id.cardGenerateQr);
-        View.OnClickListener generateQrListener = v -> Toast.makeText(this, "Chức năng Generate QR của Student 1", Toast.LENGTH_SHORT).show();
+        View.OnClickListener generateQrListener = v -> Toast.makeText(this, "Generate QR feature (Student 1)", Toast.LENGTH_SHORT).show();
 
         if (btnGenerateQr != null) {
             btnGenerateQr.setOnClickListener(generateQrListener);

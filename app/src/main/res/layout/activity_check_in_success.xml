@@ -9,7 +9,6 @@
     android:padding="24dp"
     tools:context=".CheckInSuccessActivity">
 
-    <!-- Container cho nội dung check-in thành công -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +19,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Symbol Checkmark Circle -->
         <TextView
             android:id="@+id/tvCheckMark"
             android:layout_width="72dp"
@@ -33,7 +31,6 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
-        <!-- Tiêu đề -->
         <TextView
             android:id="@+id/tvSuccessTitle"
             android:layout_width="wrap_content"
@@ -44,7 +41,6 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
-        <!-- Card chứa Booking ID và Court -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +49,6 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Booking ID -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,14 +66,12 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- Divider -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="16dp"
                 android:background="@color/border_color" />
 
-            <!-- Court -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -97,7 +90,6 @@
 
         </LinearLayout>
 
-        <!-- Thông báo -->
         <TextView
             android:id="@+id/tvSuccessMessage"
             android:layout_width="wrap_content"
@@ -109,7 +101,6 @@
 
     </LinearLayout>
 
-    <!-- Nút Back Home -->
     <Button
         android:id="@+id/btnBackHome"
         android:layout_width="match_parent"
