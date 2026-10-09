@@ -38,7 +38,13 @@ public class ScanResultActivity extends AppCompatActivity {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainScanResult), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            int p24 = (int) (24 * getResources().getDisplayMetrics().density);
+            v.setPadding(
+                    systemBars.left + p24,
+                    systemBars.top + p24,
+                    systemBars.right + p24,
+                    systemBars.bottom + p24
+            );
             return insets;
         });
 

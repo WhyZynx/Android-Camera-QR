@@ -42,4 +42,7 @@
     <string name="checkin_success_title">Check-in Successful</string>
     <string name="checkin_success_msg">Your booking has been checked in successfully.</string>
     <string name="btn_back_home">Back Home</string>
+
+    <string name="symbol_checkmark">✓</string>
+    <string name="symbol_crossmark">✕</string>
 </resources>
