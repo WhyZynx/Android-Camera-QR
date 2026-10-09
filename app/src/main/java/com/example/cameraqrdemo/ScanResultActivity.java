@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class ScanResultActivity extends AppCompatActivity {
 
+    private static final long EXPIRE_DURATION_MS = 5 * 60 * 1000L; // 5 minutes
+
     private LinearLayout layoutValid;
     private LinearLayout layoutInvalid;
 
@@ -22,6 +24,7 @@ public class ScanResultActivity extends AppCompatActivity {
     private TextView tvCourt;
     private TextView tvDate;
     private TextView tvTime;
+    private TextView tvInvalidMessage;
 
     private Button btnConfirmCheckIn;
     private Button btnCancel;
@@ -55,6 +58,7 @@ public class ScanResultActivity extends AppCompatActivity {
         tvCourt = findViewById(R.id.tvCourt);
         tvDate = findViewById(R.id.tvDate);
         tvTime = findViewById(R.id.tvTime);
+        tvInvalidMessage = findViewById(R.id.tvInvalidMessage);
 
         btnConfirmCheckIn = findViewById(R.id.btnConfirmCheckIn);
         btnCancel = findViewById(R.id.btnCancel);
@@ -82,6 +86,7 @@ public class ScanResultActivity extends AppCompatActivity {
         court = null;
         String date = null;
         String time = null;
+        String timestampStr = null;
 
         if (qrData != null && !qrData.trim().isEmpty()) {
             String[] lines = qrData.split("\\r?\\n");
@@ -95,16 +100,31 @@ public class ScanResultActivity extends AppCompatActivity {
                     date = line.substring("DATE=".length()).trim();
                 } else if (line.startsWith("TIME=")) {
                     time = line.substring("TIME=".length()).trim();
+                } else if (line.startsWith("TIMESTAMP=")) {
+                    timestampStr = line.substring("TIMESTAMP=".length()).trim();
                 }
             }
         }
 
-        boolean isValid = bookingId != null && !bookingId.isEmpty()
+        boolean hasFields = bookingId != null && !bookingId.isEmpty()
                 && court != null && !court.isEmpty()
                 && date != null && !date.isEmpty()
                 && time != null && !time.isEmpty();
 
-        if (isValid) {
+        boolean isNotExpired = false;
+        if (timestampStr != null) {
+            try {
+                long qrTimestamp = Long.parseLong(timestampStr);
+                long currentTime = System.currentTimeMillis();
+                long elapsed = currentTime - qrTimestamp;
+                if (elapsed >= -30000L && elapsed <= EXPIRE_DURATION_MS) {
+                    isNotExpired = true;
+                }
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        if (hasFields && isNotExpired) {
             layoutValid.setVisibility(View.VISIBLE);
             layoutInvalid.setVisibility(View.GONE);
 
@@ -115,6 +135,12 @@ public class ScanResultActivity extends AppCompatActivity {
         } else {
             layoutValid.setVisibility(View.GONE);
             layoutInvalid.setVisibility(View.VISIBLE);
+
+            if (hasFields) {
+                tvInvalidMessage.setText(R.string.invalid_qr_expired_msg);
+            } else {
+                tvInvalidMessage.setText(R.string.invalid_qr_msg);
+            }
         }
     }
 }

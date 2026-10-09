@@ -6,12 +6,18 @@ public class Booking {
     private final String court;
     private final String date;
     private final String time;
+    private final long timestamp;
 
     public Booking(String bookingId, String court, String date, String time) {
+        this(bookingId, court, date, time, System.currentTimeMillis());
+    }
+
+    public Booking(String bookingId, String court, String date, String time, long timestamp) {
         this.bookingId = bookingId;
         this.court = court;
         this.date = date;
         this.time = time;
+        this.timestamp = timestamp;
     }
 
     public String getBookingId() {
@@ -30,10 +36,15 @@ public class Booking {
         return time;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
     public String toQrData() {
         return "BOOKING_ID=" + bookingId + "\n"
                 + "COURT=" + court + "\n"
                 + "DATE=" + date + "\n"
-                + "TIME=" + time;
+                + "TIME=" + time + "\n"
+                + "TIMESTAMP=" + timestamp;
     }
 }

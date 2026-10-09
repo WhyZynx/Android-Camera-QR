@@ -17,7 +17,9 @@
     <string name="date_label">Date</string>
     <string name="time_label">Time</string>
 
-    <string name="scan_for_checkin">Scan this QR code to check in</string>
+    <string name="scan_for_checkin">Scan this QR code to check in (Valid for 5 mins)</string>
+    <string name="scan_for_checkin_timer">Scan to check in (Expires in %s)</string>
+    <string name="qr_expired_notice">QR code has expired. Please reopen to get a new code.</string>
     <string name="back">Back</string>
 
     <string name="qr_generation_error">Unable to generate QR code.</string>
@@ -38,6 +40,8 @@
     <string name="btn_confirm_checkin">Confirm Check-in</string>
     <string name="invalid_qr_title">Invalid QR Code</string>
     <string name="invalid_qr_msg">The QR code does not contain valid booking information.</string>
+    <string name="invalid_qr_expired_msg">The QR code has expired (valid for 5 minutes only). Please generate a new QR code.</string>
+    <string name="invalid_qr_closed_msg">The QR code is no longer active because the Booking QR screen was closed.</string>
     <string name="btn_scan_again">Scan Again</string>
     <string name="checkin_success_title">Check-in Successful</string>
     <string name="checkin_success_msg">Your booking has been checked in successfully.</string>
